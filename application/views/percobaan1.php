@@ -95,7 +95,7 @@
           <div class="modal-body">
             <div class="form-group">
               <label>Kode Saham</label>
-              <input type="text" name="stock" class="form-control" placeholder="Masukan Kode Saham" value="">
+              <input type="text" name="stock" class="form-control" placeholder="Masukan Kode Saham" value="<?php echo $content['stock']; ?>">
             </div>
           </div>
 

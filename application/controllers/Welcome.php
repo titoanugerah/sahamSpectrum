@@ -11,12 +11,14 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-		$data['content'] = $this->welcome_model->getContent('null');
+		$data['content'] = $this->welcome_model->getContent('');
 		if ($this->input->post('find')) {
 			$data['content'] = $this->welcome_model->getContent($this->input->post('stock'));
+			$this->load->view('template', $data);
 		} elseif ($this->input->post('downloadStock')) {
-			$this->welcome_model->downloadStock($this->input->post('stock'));
+			$this->welcome_model->downloadStock1($this->input->post('stock'));
+		} else {
+			$this->load->view('template', $data);
 		}
-		$this->load->view('template', $data);
 	}
 }

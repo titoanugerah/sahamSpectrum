@@ -23,11 +23,12 @@ class Welcome_model extends CI_Model {
   public function getContent($stock)
   {
     $data['title'] = 'Saham';
-    if ($stock=="null") {
+    if ($stock=="") {
       $data['view_name'] = 'percobaan0';
     } else {
       $data['list'] = $this->getStock($stock);
 //      var_dump($data['list']['row'][2]);die;
+      $data['stock'] = $stock;
       $data['view_name'] = 'percobaan1';
       $data['title'] = 'Data Saham '.$stock;
     }
@@ -55,21 +56,26 @@ class Welcome_model extends CI_Model {
     ->setCategory("private");
 
     $data = $this->getStock($stock);
-    for ($i=1; $i <$data['count']; $i++) {
+//    var_dump($data['csv']);
+
+    $i = 1;
+    foreach ($data['csv'] as $item) {
       $objPHPExcel->setActiveSheetIndex(0)
-      ->setCellValue('A'.$i, $data['csv']);
+      ->setCellValue('A'.$i, strval($item));
+      $i++;
     }
+
 
     //FORMATING
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    header("Content-Disposition: attachment; filename=stock.xls");
+    header("Content-Disposition: attachment; filename=stock.csv");
     header('Cache-Control: max-age=0');
     header ('Expires: Mon, 26 Jul 2019 05:00:00 GMT'); // Date in the past
     header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
     header ('Cache-Control: no-cache, must-revalidate'); // HTTP/1.1
     header ('Pragma: public'); // HTTP/1.0
-    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-    $objWriter->save('php://output');
+    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
+    $objWriter->save(('./assets/stock/'.$stock.'.csv'));
     return true;
   }
 
