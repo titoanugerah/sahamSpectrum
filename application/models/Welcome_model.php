@@ -75,7 +75,7 @@ class Welcome_model extends CI_Model {
     header ('Cache-Control: no-cache, must-revalidate'); // HTTP/1.1
     header ('Pragma: public'); // HTTP/1.0
     $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
-    $objWriter->save(('./assets/stock/'.$stock.'.csv'));
+    $objWriter->save(base_url('./assets/stock/'.$stock.'.csv'));
     return true;
   }
 
