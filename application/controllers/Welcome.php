@@ -17,7 +17,7 @@ class Welcome extends CI_Controller {
 			$this->load->view('template', $data);
 		} elseif ($this->input->post('downloadStock')) {
 			$this->welcome_model->downloadStock1($this->input->post('stock'));
-			echo "Done";
+		//	echo "Done";
 		} else {
 			$this->load->view('template', $data);
 		}
