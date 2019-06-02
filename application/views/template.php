@@ -56,8 +56,8 @@
       <div class="content">
         <div class="container-fluid">
           <ol class="breadcrumb" style="background:white;">
-            <li class="breadcrumb-item">CentralFile</li>
-            <li class="breadcrumb-item"><?php echo "Tester"; ?></li>
+            <li class="breadcrumb-item">MyLogicalWorld</li>
+            <li class="breadcrumb-item"><?php echo "Spectrum"; ?></li>
             <li class="breadcrumb-item active"><?php echo ucfirst($content['title']); ?></li>
           </ol>
           <?php $this->load->view('notification/'.$content['notification']); ?>
