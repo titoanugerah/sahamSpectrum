@@ -56,32 +56,50 @@ class Welcome_model extends CI_Model {
     ->setCategory("private");
 
     $data = $this->getStock($stock);
-//    var_dump($data['csv']);die;
-    for ($i=0; $i < $data['count']; $i++) {
-      $f = $data['row'][$i][5];
-      $g = sprintf("%.2f", ($data['row'][1][2]-$data['row'][1][4]));
-      //var_dump($g);die;
-      $objPHPExcel->setActiveSheetIndex(0)
-      ->setCellValue('A'.$i,$data['row'][$i][0])
-      ->setCellValue('B'.$i,$data['row'][$i][1])
-      ->setCellValue('C'.$i,$data['row'][$i][2])
-      ->setCellValue('D'.$i,$data['row'][$i][3])
-      ->setCellValue('E'.$i,$data['row'][$i][4])
-      ->setCellValue('F'.$i,$f)
-      ->setCellValue('G'.$i,$g)
+    //var_dump(($data['csv']));die;
+    for ($i=1; $i < $data['count']; $i++) {
+      $date = $data['row'][$i][0];
+      //var_dump($data['row'][$i][0]);die;
+      $open = floatval(number_format($data['row'][$i][1],2));
+       $high = floatval(number_format($data['row'][$i][2],2));
+        $low = floatval(number_format($data['row'][$i][3],2));
+        $close = floatval(number_format($data['row'][$i][4],2));
+        $volume = ((int)$data['row'][$i][5]);
+//        var_dump(floatval(number_format($data['row'][$i][1],2)));die;
 
+      //Parsing Data Into Excel
+      $objPHPExcel->setActiveSheetIndex(0)
+      ->setCellValue('A'.$i,$date)
+      ->setCellValue('B'.$i,$open)
+      ->setCellValue('C'.$i,$high)
+      ->setCellValue('D'.$i,$low)
+      ->setCellValue('E'.$i,$close)
+      ->setCellValue('F'.$i,$volume)
+      ;
+
+
+      //Orange Indicator
+      $PP = ($high + $low + $close)/3;
+      $R1 = (2*$PP) - $low;
+      $R2 = $PP+($high-$low);
+      $R3 = $high + (2*($PP-$low));
+      $S1 = (2*$PP) - $high;
+      $S2 = $PP - ($high - $low);
+      $S3 = $low - (2*($high - $PP));
+      $objPHPExcel->setActiveSheetIndex(0)
+      ->setCellValue('K'.$i,$PP)
+      ->setCellValue('L'.$i,$R1)
+      ->setCellValue('M'.$i,$R2)
+      ->setCellValue('N'.$i,$R3)
+      ->setCellValue('O'.$i,$S1)
+      ->setCellValue('P'.$i,$S2)
+      ->setCellValue('Q'.$i,$S3)
       ;
 
     }
 
-    /*
-    $i = 1;
-    foreach ($data['csv'] as $item) {
-      $objPHPExcel->setActiveSheetIndex(0)
-      ->setCellValue('A'.$i, str_replace("/n", "", strval($item)));
-      $i++;
-    }
-    */
+//    $a = $objPHPExcel->getActiveSheet()->getCell('B8')->getValue();
+//    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A101', $a);
 
     //FORMATING
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -92,6 +110,7 @@ class Welcome_model extends CI_Model {
     header ('Cache-Control: no-cache, must-revalidate'); // HTTP/1.1
     header ('Pragma: public'); // HTTP/1.0
     $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'csv');
+
 //    $objWriter->save(base_url('./assets/stock/'.$stock.'.csv'));
     $objWriter->save('php://output');
     return true;
