@@ -87,13 +87,13 @@ class Welcome_model extends CI_Model {
       $S2 = $PP - ($high - $low);
       $S3 = $low - (2*($high - $PP));
       $objPHPExcel->setActiveSheetIndex(0)
-      ->setCellValue('K'.$i,$PP)
-      ->setCellValue('L'.$i,$R1)
-      ->setCellValue('M'.$i,$R2)
-      ->setCellValue('N'.$i,$R3)
-      ->setCellValue('O'.$i,$S1)
-      ->setCellValue('P'.$i,$S2)
-      ->setCellValue('Q'.$i,$S3)
+      ->setCellValue('G'.$i,$PP)
+      ->setCellValue('H'.$i,$R1)
+      ->setCellValue('I'.$i,$R2)
+      ->setCellValue('J'.$i,$R3)
+      ->setCellValue('K'.$i,$S1)
+      ->setCellValue('L'.$i,$S2)
+      ->setCellValue('M'.$i,$S3)
       ;
 
     }
