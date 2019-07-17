@@ -56,8 +56,24 @@ class Welcome_model extends CI_Model {
     ->setCategory("private");
 
     $data = $this->getStock($stock);
+    $objPHPExcel->setActiveSheetIndex(0)
+    ->setCellValue('A1','HIGH')
+    ->setCellValue('B1','LOW')
+    ->setCellValue('C1','CLOSE')
+    ->setCellValue('D1','VOLUME')
+    ->setCellValue('E1','PP')
+    ->setCellValue('F1','R1')
+    ->setCellValue('G1','R2')
+    ->setCellValue('H1','R3')
+    ->setCellValue('I1','S1')
+    ->setCellValue('J1','S2')
+    ->setCellValue('K1','S3')
+    ->setCellValue('L1','CLASS')
+    ;
+
+
     //var_dump(($data['csv']));die;
-    for ($i=1; $i < $data['count']; $i++) {
+    for ($i=2; $i < $data['count']; $i++) {
       $date = $data['row'][$i][0];
       //var_dump($data['row'][$i][0]);die;
       $open = floatval(number_format($data['row'][$i][1],2));
@@ -69,12 +85,10 @@ class Welcome_model extends CI_Model {
 
       //Parsing Data Into Excel
       $objPHPExcel->setActiveSheetIndex(0)
-      ->setCellValue('A'.$i,$date)
-      ->setCellValue('B'.$i,$open)
-      ->setCellValue('C'.$i,$high)
-      ->setCellValue('D'.$i,$low)
-      ->setCellValue('E'.$i,$close)
-      ->setCellValue('F'.$i,$volume)
+      ->setCellValue('A'.$i,$high)
+      ->setCellValue('B'.$i,$low)
+      ->setCellValue('C'.$i,$close)
+      ->setCellValue('D'.$i,$volume)
       ;
 
 
@@ -87,16 +101,22 @@ class Welcome_model extends CI_Model {
       $S2 = $PP - ($high - $low);
       $S3 = $low - (2*($high - $PP));
       $objPHPExcel->setActiveSheetIndex(0)
-      ->setCellValue('G'.$i,$PP)
-      ->setCellValue('H'.$i,$R1)
-      ->setCellValue('I'.$i,$R2)
-      ->setCellValue('J'.$i,$R3)
-      ->setCellValue('K'.$i,$S1)
-      ->setCellValue('L'.$i,$S2)
-      ->setCellValue('M'.$i,$S3)
+      ->setCellValue('E'.$i,$PP)
+      ->setCellValue('F'.$i,$R1)
+      ->setCellValue('G'.$i,$R2)
+      ->setCellValue('H'.$i,$R3)
+      ->setCellValue('I'.$i,$S1)
+      ->setCellValue('J'.$i,$S2)
+      ->setCellValue('K'.$i,$S3)
       ;
 
     }
+
+    $objPHPExcel->setActiveSheetIndex(0)
+    ->setCellValue('L2','SELL')
+    ->setCellValue('L3','BUY')
+    ->setCellValue('L4','HOLD')
+    ;
 
 //    $a = $objPHPExcel->getActiveSheet()->getCell('B8')->getValue();
 //    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A101', $a);
