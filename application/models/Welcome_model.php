@@ -108,15 +108,23 @@ class Welcome_model extends CI_Model {
       ->setCellValue('I'.$i,$S1)
       ->setCellValue('J'.$i,$S2)
       ->setCellValue('K'.$i,$S3)
+
       ;
+
+      if ($i>4) {
+        $objPHPExcel->setActiveSheetIndex(0)
+        ->setCellValue('L'.$i,'?');
+      }
 
     }
 
     $objPHPExcel->setActiveSheetIndex(0)
     ->setCellValue('L2','SELL')
     ->setCellValue('L3','BUY')
-    ->setCellValue('L4','HOLD')
-    ;
+    ->setCellValue('L4','HOLD')  ;
+
+
+
 
 //    $a = $objPHPExcel->getActiveSheet()->getCell('B8')->getValue();
 //    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A101', $a);
