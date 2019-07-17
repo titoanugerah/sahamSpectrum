@@ -113,7 +113,7 @@ class Welcome_model extends CI_Model {
 
       if ($i>4) {
         $objPHPExcel->setActiveSheetIndex(0)
-        ->setCellValue('L'.$i,'?');
+        ->setCellValue('L'.$i,'HOLD');
       }
 
     }
