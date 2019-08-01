@@ -6,9 +6,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   $ci = &get_instance();
   $cmd = 'java -classpath "weka.jar" weka.core.converters.CSVLoader -N "last" balance_csv.csv > stock.arff ';
   exec($cmd,$output);
-  $cmd = 'java -classpath "weka.jar" weka.classifiers.trees.J48 -t "stock.arff" -d '.$stock.'.model -p 12';
-  exec($cmd,$output);
   var_dump($output);die;
+
+  $cmd = 'java -classpath "weka.jar" weka.classifiers.trees.J48 -t "stock.arff" -d "'.base_url('./assets/upload/').$stock.'.model" -p 12';
+  exec($cmd,$output);
 
   //var_dump($output);die;
   //$data = explode(":",$output);

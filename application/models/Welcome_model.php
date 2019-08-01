@@ -55,7 +55,7 @@ class Welcome_model extends CI_Model {
   {
     $config['upload_path'] = APPPATH.'../assets/upload/';
     $config['overwrite'] = TRUE;
-    $config['file_name']     = $filename;
+    $config['file_name']     = $filename.'.model';
     $config['allowed_types'] = '*';
     $this->load->library('upload', $config);
     if (!$this->upload->do_upload('fileUpload')) {
@@ -203,7 +203,7 @@ class Welcome_model extends CI_Model {
   {
     $data['title'] = 'Prediksi Saham';
     $data['view_name'] = 'listStockPrediction';
-  //  $this->getPrediction('MEDC.JK');
+   $this->getPrediction('MEDC.JK');
     $data['stock'] = $this->getAllData('stock');
     $data['notification'] = 'no';
     return $data;
@@ -211,7 +211,7 @@ class Welcome_model extends CI_Model {
 
   public function addStock()
   {
-    $upload = $this->uploadFile($this->input->post('stock_name'));
+    $upload = $this->uploadFile($this->input->post('stock_code'));
     $data = array(
       'stock_name' => $this->input->post('stock_name'),
       'stock_type' => $this->input->post('stock_type'),
