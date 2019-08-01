@@ -22,4 +22,17 @@ class Welcome extends CI_Controller {
 			$this->load->view('template', $data);
 		}
 	}
+
+	public function deleteStock($id)
+	{
+		$this->welcome_model->deleteStock($id);
+		redirect(base_url('listStockPrediction'));
+	}
+
+	public function listStockPrediction()
+	{
+		$data['content'] = $this->welcome_model->cPrediction(null);
+		if($this->input->post('addStock')){$data['content'] = $this->welcome_model->cPrediction($this->welcome_model->addStock());}
+		$this->load->view('template', $data);
+	}
 }

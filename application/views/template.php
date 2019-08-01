@@ -31,7 +31,18 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-
+          <li class="nav-item active">
+            <a class="nav-link" href="<?php echo base_url('') ?>">
+              <i class="material-icons">content_paste</i>
+              <p>Cari Saham</p>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="<?php echo base_url('listStockPrediction') ?>">
+              <i class="material-icons">content_paste</i>
+              <p>List Prediksi Saham</p>
+            </a>
+          </li>
 
         </ul>
       </div>
