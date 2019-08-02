@@ -31,8 +31,10 @@ class Welcome extends CI_Controller {
 
 	public function listStockPrediction()
 	{
-		$data['content'] = $this->welcome_model->cPrediction(null);
 		if($this->input->post('addStock')){$data['content'] = $this->welcome_model->cPrediction($this->welcome_model->addStock());}
+		elseif($this->input->post('refreshPrediction')){$this->welcome_model->refreshPrediction();}
+
+		$data['content'] = $this->welcome_model->cPrediction(null);
 		$this->load->view('template', $data);
 	}
 }

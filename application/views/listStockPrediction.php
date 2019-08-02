@@ -2,9 +2,12 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-body">
-        <button class="btn btn-info" data-toggle="modal" data-target="#myModal1" hidden>Pencarian</button>
-        <button class="btn btn-success" data-toggle="modal" data-target="#myModal">Tambah Saham Baru</button>
+        <form method="post">
+          <button class="btn btn-info" data-toggle="modal" data-target="#myModal1" hidden>Pencarian</button>
+          <button class="btn btn-success" data-toggle="modal" data-target="#myModal">Tambah Saham Baru</button>
 
+          <button type="submit" name="refreshPrediction" value="refreshPrediction" class="btn btn-success">Refresh Prediction</button>
+        </form>
         <table class="table">
           <thead>
             <tr>
